@@ -1,0 +1,15 @@
+Schedule
+6/21 각자 구현 완성
+6/24 18:00 전체 구현 완성
+6/26 Final Presentation, Report
+
+TODO
+1) General Prefab 공유 (공, 길) 및 Scaling - 6/16
+- 필요한 색상 결정
+- Asset Store에서 사용할 수 있는 asset 조사
+2) 통합 - 민재
+3) Camera - 진수	
+- Ball Position following <- 키보드 조작
+- Part 별 및 전체 카메라
+- 관련 UI
+- 최종 영상
