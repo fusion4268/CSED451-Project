@@ -32,6 +32,6 @@ public class Button : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         GameObject Cannonball = GameObject.Find("Cannonball");
         Rigidbody rb = Cannonball.GetComponent<Rigidbody>();
-        rb.AddForce(new Vector3(0, .55f, 1)*1000);
+        rb.AddForce(new Vector3(1, .55f, 0)*1000);
     }
 }
