@@ -13,9 +13,9 @@ public class Pendulum : MonoBehaviour
         //Debug.Log(tf.position);
         //Debug.Log(tf.parent.transform.position);
         //tf.position = tf.parent.transform.position + new Vector3(3, -6, 0);
-        tf.position = GameObject.Find("PendulumPlane").GetComponent<Transform>().position + new Vector3(0, 1.5f,0);
+        tf.position = GameObject.Find("PendulumPlane").GetComponent<Transform>().position + new Vector3(-0.5f, 1.5f,0);
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+        rb.constraints = RigidbodyConstraints.FreezePosition;
     }
 
     // Update is called once per frame
