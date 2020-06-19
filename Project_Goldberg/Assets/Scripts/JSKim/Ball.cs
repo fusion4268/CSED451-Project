@@ -6,11 +6,12 @@ using UnityEngine.UIElements;
 public class Ball : MonoBehaviour
 {
     public bool inWindArea = false;
-    public GameObject windArea;
+    private GameObject windArea;
+    private GameObject windButton;
     Vector3 windDirection;
     float windStrength;
     Vector3 previousPos;
-    private float resistanceFactor = 1f;
+    private float resistanceFactor = 0.2f;
     Vector3 velocity;
 
     Rigidbody rb;
@@ -28,9 +29,11 @@ public class Ball : MonoBehaviour
     {
         velocity = transform.position - previousPos;
         Vector3 windResistance = - GetScale(velocity.normalized,(GetScale(velocity,velocity) / 0.02f)) * resistanceFactor;
+        //Vector3 windResistance = new Vector3(0, 0, 0);
         if (inWindArea)
         {
             rb.AddForce(WindAmplitude() + windResistance);
+            //Debug.Log(WindAmplitude() + windResistance);
         }
         else
         {
@@ -49,14 +52,29 @@ public class Ball : MonoBehaviour
             windStrength = windArea.GetComponent<WindArea>().strength;
             Debug.Log("Start");
         }
+        else if(coll.gameObject.tag == "windButton")
+        {
+            Debug.Log("Button Start");
+            windButton = coll.gameObject;
+            windButton.GetComponent<WindButton>().wind.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider coll)
     {
         if(coll.gameObject.tag == "windArea")
         {
+            
             inWindArea = false;
             Debug.Log("End");
+        }
+        else if (coll.gameObject.tag == "windButton")
+        {
+            Debug.Log("Button End");
+            windButton.GetComponent<WindButton>().wind.GetComponentInChildren<WindArea>().strength += 40;
+            windButton.GetComponent<WindButton>().arrowLarger();
+            windButton.GetComponent<WindButton>().wind.SetActive(false);            
+            windButton.GetComponent<WindButton>().pyramid.GetComponent<Ball>().inWindArea = false;
         }
     }
 
@@ -66,10 +84,11 @@ public class Ball : MonoBehaviour
         //mapping to vector field -1/2 ~ 1/2
         Vector3 mapping1 = GetScale((transform.position - windArea.transform.position), InverseVector(windArea.transform.localScale));
         //mapping to vector field 0 ~ 1
-        Vector3 mapping2 = mapping1 + GetScale(windDirection, new Vector3(0.5f, 0.5f, 0.5f));
+        Vector3 mapping2 = GetScale(windDirection, mapping1) + GetScale(new Vector3(Mathf.Abs(windDirection.x), Mathf.Abs(windDirection.y), Mathf.Abs(windDirection.z)), new Vector3(0.5f, 0.5f, 0.5f));
         //mapping to wind function (-x+1)^n
         Vector3 mapping3 = windFunction(mapping2);        
         Vector3 result = GetScale(mapping3, windDirection) * windStrength;
+        Debug.Log(mapping3);
         
         return result;
     }

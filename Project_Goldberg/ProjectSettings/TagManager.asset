@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fire
   - windArea
+  - windButton
   layers:
   - Default
   - TransparentFX
