@@ -8,7 +8,7 @@ public class SpeedCopy : MonoBehaviour
     public GameObject arrow;
     private WindArea copyArea;
     private WindArea myArea;
-    private float arrowScale = 1.2f;
+    private float arrowScale = 1.1f;
     float prevStrength;
     
     // Start is called before the first frame update

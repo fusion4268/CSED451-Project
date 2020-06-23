@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class Ball : MonoBehaviour
 {
     public bool inWindArea = false;
+    public GameObject slope;
     private GameObject windArea;
     private GameObject windButton;
     Vector3 windDirection;
@@ -33,7 +34,6 @@ public class Ball : MonoBehaviour
         if (inWindArea)
         {
             rb.AddForce(WindAmplitude() + windResistance);
-            //Debug.Log(WindAmplitude() + windResistance);
         }
         else
         {
@@ -50,11 +50,11 @@ public class Ball : MonoBehaviour
             inWindArea = true;
             windDirection = windArea.GetComponent<WindArea>().direction;
             windStrength = windArea.GetComponent<WindArea>().strength;
-            Debug.Log("Start");
+            //Debug.Log("Start");
         }
         else if(coll.gameObject.tag == "windButton")
         {
-            Debug.Log("Button Start");
+            //Debug.Log("Button Start");
             windButton = coll.gameObject;
             windButton.GetComponent<WindButton>().wind.SetActive(true);
         }
@@ -64,17 +64,20 @@ public class Ball : MonoBehaviour
     {
         if(coll.gameObject.tag == "windArea")
         {
-            
             inWindArea = false;
-            Debug.Log("End");
+            //Debug.Log("End");
         }
         else if (coll.gameObject.tag == "windButton")
         {
-            Debug.Log("Button End");
+            //Debug.Log("Button End");
             windButton.GetComponent<WindButton>().wind.GetComponentInChildren<WindArea>().strength += 40;
             windButton.GetComponent<WindButton>().arrowLarger();
             windButton.GetComponent<WindButton>().wind.SetActive(false);            
             windButton.GetComponent<WindButton>().pyramid.GetComponent<Ball>().inWindArea = false;
+        }
+        else if(coll.gameObject.tag == "slopeCollider")
+        {
+            slope.GetComponent<SlopeTilting>().rotate = true;
         }
     }
 
@@ -88,7 +91,7 @@ public class Ball : MonoBehaviour
         //mapping to wind function (-x+1)^n
         Vector3 mapping3 = windFunction(mapping2);        
         Vector3 result = GetScale(mapping3, windDirection) * windStrength;
-        Debug.Log(mapping3);
+        //Debug.Log(mapping3);
         
         return result;
     }

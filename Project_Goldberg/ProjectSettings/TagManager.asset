@@ -7,6 +7,8 @@ TagManager:
   - Fire
   - windArea
   - windButton
+  - slopeCollider
+  - textCollider
   layers:
   - Default
   - TransparentFX
