@@ -60,7 +60,7 @@ public class Bucket : MonoBehaviour
 
     IEnumerator BucketDelay()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
 
         GameObject breakpoint = GameObject.Find("Cylinder (6)_breakpoint");
         Rigidbody rb_breakpoint = breakpoint.GetComponent<Rigidbody>();

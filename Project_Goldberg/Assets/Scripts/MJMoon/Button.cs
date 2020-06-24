@@ -33,5 +33,6 @@ public class Button : MonoBehaviour
         GameObject Cannonball = GameObject.Find("Cannonball");
         Rigidbody rb = Cannonball.GetComponent<Rigidbody>();
         rb.AddForce(new Vector3(1, .55f, 0)*1000);
+        rb.useGravity = true;
     }
 }
