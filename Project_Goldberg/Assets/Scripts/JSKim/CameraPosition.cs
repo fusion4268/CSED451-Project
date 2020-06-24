@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraPosition : MonoBehaviour
 {
     public GameObject sphere;
-    public float arrowScale = 0.025f;
+    public float arrowScale;
+    public float rotateScale;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,31 +18,44 @@ public class CameraPosition : MonoBehaviour
     {
         // Sphere Tracking
         //transform.position = new Vector3(sphere.transform.position.x, sphere.transform.position.y+3, transform.position.z);
-
-        if (Input.GetKey(KeyCode.UpArrow))
+        //Vector3.ler
+        if (Input.GetKey(KeyCode.W))
         {
-            transform.position += new Vector3(0, arrowScale, 0);
+            transform.position += transform.TransformDirection(new Vector3(0, arrowScale, 0));
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position += transform.TransformDirection(new Vector3(0, -arrowScale, 0));
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position += transform.TransformDirection(new Vector3(-arrowScale, 0, 0));
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += transform.TransformDirection(new Vector3(arrowScale, 0, 0));
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += new Vector3(0, -arrowScale, 0);
+            transform.position += transform.TransformDirection(new Vector3(0, 0, -arrowScale));
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position += new Vector3(-arrowScale, 0, 0);
+            transform.position += transform.TransformDirection(new Vector3(0, 0, arrowScale));
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.Q))
         {
-            transform.position += new Vector3(arrowScale, 0, 0);
+            transform.Rotate(0, -rotateScale, 0);
         }
-        if (Input.GetKey(KeyCode.Keypad0))
+        if (Input.GetKey(KeyCode.E))
         {
-            transform.position += new Vector3(0, 0, -arrowScale);
+            transform.Rotate(0, rotateScale, 0);
         }
-        if (Input.GetKey(KeyCode.Keypad1))
+        if (Input.GetKey(KeyCode.R))
         {
-            transform.position += new Vector3(0, 0, arrowScale);
+            transform.Rotate(0, 0, -rotateScale);
         }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
