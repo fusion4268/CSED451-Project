@@ -22,6 +22,7 @@ public class Button : MonoBehaviour
     {
         if(!isPushed && collision.gameObject.name == "ButtonCube")
         {
+            isPushed = true;
             mat.color = new Color(0, 0, 1);
 
             StartCoroutine("ButtonDelay");
@@ -35,6 +36,5 @@ public class Button : MonoBehaviour
         Rigidbody rb = Cannonball.GetComponent<Rigidbody>();
         rb.AddForce(new Vector3(1, .55f, 0)*1000);
         rb.useGravity = true;
-        isPushed = true;
     }
 }
