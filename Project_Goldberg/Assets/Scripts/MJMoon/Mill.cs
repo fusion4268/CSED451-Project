@@ -23,6 +23,14 @@ public class Mill : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+
+
+            GameObject Spheres = GameObject.Find("Spheres");
+            for(int i=0; i < Spheres.transform.childCount; i++)
+            {
+                rb = Spheres.transform.GetChild(i).GetComponent<Rigidbody>();
+                rb.constraints = 0;
+            }
         }
     }
 }

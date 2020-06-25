@@ -9,6 +9,7 @@ public class Button : MonoBehaviour
 {
     MeshRenderer mesh;
     Material mat;
+    bool isPushed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class Button : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "ButtonCube")
+        if(!isPushed && collision.gameObject.name == "ButtonCube")
         {
             mat.color = new Color(0, 0, 1);
 
@@ -34,5 +35,6 @@ public class Button : MonoBehaviour
         Rigidbody rb = Cannonball.GetComponent<Rigidbody>();
         rb.AddForce(new Vector3(1, .55f, 0)*1000);
         rb.useGravity = true;
+        isPushed = true;
     }
 }
