@@ -27,7 +27,15 @@ public class Bucket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (((collisionCount == FULLCOLLISION) && !istriggered) || Input.GetKeyDown(KeyCode.Z))
+        {
+            StartCoroutine("BucketDelay");
+            istriggered = true;
 
+            GameObject soccerBall = GameObject.Find("Soccer Ball");
+            Rigidbody rb_soccerBall = soccerBall.GetComponent<Rigidbody>();
+            rb_soccerBall.constraints = 0;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -47,15 +55,7 @@ public class Bucket : MonoBehaviour
         else if (collision.gameObject.name == "Sphere_purple")
             collisionCount |= COLLISION_PURPLE;
 
-        if ((collisionCount == FULLCOLLISION) && !istriggered)
-        {
-            StartCoroutine("BucketDelay");
-            istriggered = true;
-
-            GameObject soccerBall = GameObject.Find("Soccer Ball");
-            Rigidbody rb_soccerBall = soccerBall.GetComponent<Rigidbody>();
-            rb_soccerBall.constraints = 0;
-        }
+        
     }
 
     IEnumerator BucketDelay()

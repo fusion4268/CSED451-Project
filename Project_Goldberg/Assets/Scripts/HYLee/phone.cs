@@ -12,7 +12,7 @@ public class phone : MonoBehaviour
     void Start()
     {
         originalx = gameObject.transform.position.x;
-        cnt = 1000;
+        cnt = 250;
         cntb = true;
         time = 1000;
     }
